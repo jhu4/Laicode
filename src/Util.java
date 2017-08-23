@@ -4,6 +4,16 @@ import java.util.*;
  * Created by jhu4 on 6/29/17.
  */
 public class Util {
+    public static void print(int[] array) {
+        for (int i : array) {
+            System.out.print(i + " ");
+        }
+        System.out.print("\n");
+    }
+    public static <E> void print(E element) {
+        System.out.print(element + " ");
+    }
+
     public static TreeNode buildTree(int[] array) {
         TreeNode top = new TreeNode(array[0]);
 
@@ -12,27 +22,25 @@ public class Util {
 
         int i = 1;
 
-        while(i < array.length) {
+        while (i < array.length) {
             TreeNode tn = q.poll();
-            if(tn == null) {
+            if (tn == null) {
                 i += 2;
                 continue;
             }
 
-            if(array[i] == -1) { //null node
+            if (array[i] == -1) { //null node
                 q.offer(null);
-            }
-            else {
+            } else {
                 tn.left = new TreeNode(array[i]);
                 q.offer(tn.left);
             }
             i++;
 
-            if(i < array.length) {
-                if(array[i] == -1) { //null node
+            if (i < array.length) {
+                if (array[i] == -1) { //null node
                     q.offer(null);
-                }
-                else {
+                } else {
                     tn.right = new TreeNode(array[i]);
                     q.offer(tn.right);
                 }
@@ -47,7 +55,7 @@ public class Util {
     public static ListNode buildLinkedlist(int[] array) {
         ListNode dummy = new ListNode(0);
         ListNode cur = dummy;
-        for(int i : array) {
+        for (int i : array) {
             cur.next = new ListNode(i);
             cur = cur.next;
         }
@@ -55,20 +63,13 @@ public class Util {
     }
 
     public static void print(List list) {
-        for(Object o : list) {
+        for (Object o : list) {
             System.out.print(o + " ");
         }
     }
 
-    public static void print(int[] array) {
-        for (int i : array) {
-            System.out.print(i + " ");
-        }
-        System.out.print("\n");
-    }
-
     public static void print(ListNode node) {
-        while(node != null) {
+        while (node != null) {
             System.out.print(node.value + " ");
             node = node.next;
         }
@@ -79,12 +80,12 @@ public class Util {
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(node);
 
-        while(!q.isEmpty()) {
+        while (!q.isEmpty()) {
             int size = q.size();
             TreeNode tn;
-            for(int i = 0; i < size; i++) {
+            for (int i = 0; i < size; i++) {
                 tn = q.poll();
-                if(tn == null) {
+                if (tn == null) {
                     System.out.print(-1 + " ");
                     continue;
                 }
@@ -98,7 +99,7 @@ public class Util {
 
     public static void print(GraphNode n) {
         System.out.print(n.key + "  |  ");
-        for(GraphNode neighbor : n.neighbors) {
+        for (GraphNode neighbor : n.neighbors) {
             System.out.print(neighbor.key + " ");
         }
         System.out.print("/n");
@@ -123,5 +124,6 @@ public class Util {
     public static void print(String s) {
         System.out.println(s);
     }
+
 
 }
