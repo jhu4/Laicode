@@ -145,24 +145,20 @@ public class ClassEight {
 	}
 	//----------------------------------------------------------------------------------------
 	public int longest(String input) {
-		Map<Character, Integer> map = new HashMap<>();
-		int startIndex = 0;
-		int max = Integer.MIN_VALUE;
-
-		for (int i = 0; i < input.length(); i++) {
-			Integer index = map.get(input.charAt(i));
+		Set<Character> hs = new HashSet<>();
+		int longest = Integer.MIN_VALUE;
+		int slow = 0, fast = 0;
 
 
-			if (index != null && index >= startIndex) { //if the character is in the result substring
-				startIndex = index + 1; //we update the new start index and exclude the previous character
+		while (fast < input.length()) {
+			if (hs.contains(input.charAt(fast))) {
+				hs.remove(input.charAt(slow++));
 			} else {
-				max = Math.max(max, i + 1 - startIndex);
+				hs.add(input.charAt(fast++));
+				longest = Math.max(longest, fast - slow);
 			}
-
-			map.put(input.charAt(i), i);
 		}
-
-		return max;
+		return longest;
 	}
 
 	//----------------------------------------------------------------------------------------
