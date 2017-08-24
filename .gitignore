@@ -1,3 +1,5 @@
 .idea/*
 out/*
 *.class
+.DS_Store
+Laicode.iml
