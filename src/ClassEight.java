@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ClassEight {
 	public List<String> permutations(String set) {
@@ -147,6 +144,26 @@ public class ClassEight {
 		}
 	}
 	//----------------------------------------------------------------------------------------
+	public int longest(String input) {
+		Map<Character, Integer> map = new HashMap<>();
+		int startIndex = 0;
+		int max = Integer.MIN_VALUE;
+
+		for (int i = 0; i < input.length(); i++) {
+			Integer index = map.get(input.charAt(i));
+
+
+			if (index != null && index >= startIndex) { //if the character is in the result substring
+				startIndex = index + 1; //we update the new start index and exclude the previous character
+			} else {
+				max = Math.max(max, i + 1 - startIndex);
+			}
+
+			map.put(input.charAt(i), i);
+		}
+
+		return max;
+	}
 
 	//----------------------------------------------------------------------------------------
 	public String rightShift(String input, int n) {
@@ -183,6 +200,6 @@ public class ClassEight {
 		ClassEight c8 = new ClassEight();
 		HashSet<Integer> hm = new HashSet<>();
 
-		Util.print(c8.reorder(new int[]{1,3,5,7,2,4,6,8,10}));
+		Util.print(c8.longest("a"));
 	}
 }
