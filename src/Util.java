@@ -62,9 +62,9 @@ public class Util {
         return dummy.next;
     }
 
-    public static void print(List list) {
-        for (Object o : list) {
-            System.out.print(o + " ");
+    public static <E> void print(List<E> list) {
+        for (E e : list) {
+            print(e);
         }
     }
 

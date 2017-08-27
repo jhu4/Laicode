@@ -1,36 +1,63 @@
+/**
+ * Created by jhu4 on 8/25/17.
+ */
+import java.util.*;
+
 public class ClassTen {
-  public boolean isPowerOfTwo(int number) {
-    if (number <= 0) {
-      return false;
-    }
-
-    int count = 0;
-    while (number > 0) {
-      count += number & 1;
-      number >>= 1;
-    }
-    return count == 1;
+  //------------------------------------------------------------------------------------------------------
+  public List<List<Integer>> nqueens(int n) {
+    List<List<Integer>> result = new LinkedList<List<Integer>>();
+    nqueens(result, new ArrayList<>(), n);
+    return result;
   }
 
-  /*
-  public boolean isPowerOfTwo(int number) {
-    //if assume that the input is a positive number
-    return number != 0 && (number & (number - 1)) == 0;
-  }
-  */
-
-  //---------------------------------------------------------------------------
-  public int diffBits(int a, int b) {
-    int count = 0;
-    for (int c = a ^ b; c != 0; c >>>= 1) { //>>> is a logical right shift, writing 0s into the leftmost bit
-      count += c & 1;
+  public void nqueens(List<List<Integer>> result, List<Integer> prev, int n) {
+    if (prev.size() == n) {
+      result.add(new ArrayList<>(prev));
+      return;
     }
 
-    return count;
+    for (int i = 0; i < n; i++) { //this loop tries different column in this layer
+      if (nqueensValidate(prev, i)) {
+        prev.add(i);
+        nqueens(result, prev, n);
+        prev.remove(prev.size() - 1);
+      }
+    }
   }
 
+  private boolean nqueensValidate(List<Integer> prev, int column) {
+    int row = prev.size();
+    for (int i = 0; i < row; i++) {
+      int col = prev.get(i);
+      //two queens cannot be in the same column OR two queens cannot be in a diagonal line
+      if (col == column || Math.abs(col - column) == row - i) {
+        return false;
+      }
+    }
+    return true;
+  }
+  //------------------------------------------------------------------------------------------------------
+  public ListNode reverseInPairs(ListNode head) {
+    if (head == null || head.next == null) {
+      return head;
+    }
+
+    //e.g. A -> B -> C
+    ListNode temp = head.next.next; // save C
+    head.next.next = head; // A -> B -> A
+    head = head.next; // B -> A
+
+    head.next.next = reverseInPairs(temp); //B -> A -> reverse(C)
+
+    return head;
+  }
+
+  //------------------------------------------------------------------------------------------------------
   public static void main(String[] args) {
     ClassTen c10 = new ClassTen();
-    Util.print(c10.diffBits(2147483647,-2147483648));
+    ListNode head = Util.buildLinkedlist(new int[]{1,2,3});
+    Util.print(c10.reverseInPairs(head));
+
   }
 }
