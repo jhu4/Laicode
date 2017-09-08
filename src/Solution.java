@@ -1,49 +1,22 @@
-import java.util.*;
 public class Solution {
-  Stack<Integer> st;
-  Stack<Integer> minStack;
+  private int count;
+  private Integer sample;
 
   public Solution() {
-    this.st = new Stack<>();
-    this.minStack = new Stack<>();
+    count = 0;
   }
 
-  public int pop() {
-    if(st.empty()) {
-      return -1;
-    }
-    else {
-      minStack.pop();
-      return st.pop();
+  public void read(int value) {
+    count++;
+    if (Math.random() * count == 0) {
+      sample = value;
     }
   }
 
-  public void push(int element) {
-    st.push(element);
-
-    if(minStack.empty()) {
-      minStack.push(element);
-    }
-    else {
-      minStack.push(Math.min(minStack.peek(), element));
-    }
+  public Integer sample() {
+    return sample;
   }
 
-  public int top() {
-    if(st.empty()) {
-      return -1;
-    }
-    else {
-      return st.peek();
-    }
-  }
 
-  public int min() {
-    if(st.empty()) {
-      return -1;
-    }
-    else {
-      return minStack.peek();
-    }
-  }
+
 }
